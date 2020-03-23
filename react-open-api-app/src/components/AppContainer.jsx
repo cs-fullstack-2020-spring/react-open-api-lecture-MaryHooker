@@ -18,19 +18,28 @@ class AppContainer extends Component {
     }
 
 
-    //fetch from web service in its own method
-    loadData = () => {
+    //fetch from web service in its own method(use promises and the async/await)
+    loadData = async() => {
         //sanity
         console.log(`Trying to fetch data`)
-        //simple fetch method/ have to pass in the url
-        fetch('http://universities.hipolabs.com/search?name=southwest')
-            //taking the data that gets returned from the fetch and extracting just the json
-            .then((data) => data.json())
-            .then((data) => this.setState(
+        // //simple fetch method/ have to pass in the url
+        // fetch('http://universities.hipolabs.com/search?name=southwest')
+        //     //taking the data that gets returned from the fetch and extracting just the json
+        //     .then((data) => data.json())
+        //     .then((data) => this.setState(
+        //         {
+        //             dataList: data
+        //         }
+        //     ))
+
+            //same as above but a simpler form and without promises/ USED SYNC & AWAIT
+            const response = await fetch('http://universities.hipolabs.com/search?name=southwest');
+            const json = await response.json();
+            this.setState(
                 {
-                    dataList: data
+                    dataList:json
                 }
-            ))
+            );
 
 
     }
@@ -48,7 +57,8 @@ class AppContainer extends Component {
                         return (
                             <div key={index}>
                                 <p>{`Country: ${post.country}`}</p>
-                                <p>{`Name: ${post.name}`}</p>
+                                <p>{`School Name: ${post.name}`}</p>
+                                <a target='_blank' rel="noopener noreferrer" href={post.web_pages[0]}>{post.name}</a>
                                 <hr className='breaks'/>
                             </div>
                         )
