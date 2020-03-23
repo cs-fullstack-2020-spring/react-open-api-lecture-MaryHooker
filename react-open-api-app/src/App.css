@@ -1,0 +1,11 @@
+body{
+  background-color: rgb(34, 87, 34);
+  color: rgb(185, 185, 43);
+  text-align: center;
+  font-size: 18px;
+  font-family: serif;
+}
+
+.breaks{
+  border:2px solid rgb(185, 185, 43);
+}
